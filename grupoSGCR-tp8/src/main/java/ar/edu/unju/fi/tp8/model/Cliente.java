@@ -60,8 +60,8 @@ import org.springframework.stereotype.Component;
 		@Column(name = "cli_nombreApellido")
 		private String nombreApellido;
 		
-		
-		@Email(message = "Ingrese un E-mail")
+		@NotBlank(message = "Debe ingresar un E-mail")
+		@Email(message = "Ingrese un E-mail valido")
 		@Column(name="cli_email")
 		private String email;
 		

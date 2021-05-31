@@ -115,10 +115,12 @@ public class CompraController {
 		
 		return modelView;
 }
-	@GetMapping("/compra-busqueda")
-	public String buscarCompraPorFiltro(@RequestParam(name="nombre")String nombre, @RequestParam(name="precio")double precio,Model model, @ModelAttribute(name="compras") Compra compra){
-	    model.addAttribute("compra", compraService.getAllCompras());
-	    model.addAttribute("compras", compraService.buscarProductos(nombre, precio));
+	@PostMapping("/compra-busqueda")
+	public String buscarCompraPorFiltro(Model model, @ModelAttribute(name="comprab") Compra compra){
+		LOGGER.info("anda? :"  + compra);
+		
+		model.addAttribute("comprab", compra);
+	    model.addAttribute("compras", compraService.buscarProductos(compra.getProducto().getNombre(), compra.getTotal()));
 	    return "compras";
 	}
 }
