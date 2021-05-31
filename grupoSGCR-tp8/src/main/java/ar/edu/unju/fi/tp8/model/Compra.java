@@ -32,7 +32,6 @@ import org.springframework.stereotype.Component;
 		@Column(name = "com_cantidad")
 		private int cantidad;
 		
-		@Size(min=1,message="Debe ingresar algun valor")
 		@Column(name = "com_total")
 		private double total;
 		
