@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,8 @@ import ar.edu.unju.fi.tp8.service.ICompraService;
 
 @Service("compraServiceMysql")
 public class CompraServiceImpMysql implements ICompraService {
+	
+	private static final Log LOGGER = LogFactory.getLog(CompraServiceImpMysql.class);
 	
 	@Autowired
 	private ICompraRepository compraRepository;
@@ -57,9 +61,10 @@ public class CompraServiceImpMysql implements ICompraService {
 
 	@Override
 	public List<Compra> buscarProductos(String nombre, double total) {
+		LOGGER.info("anda? :"  + nombre+total);
 		List<Compra> compras = new ArrayList<Compra>();
 		if(!nombre.isEmpty() && total >=0) {
-			compras = compraRepository.findByProductoNombreAndProductoPrecioGreaterThanEqual(nombre, total);
+			compras = compraRepository.findByProductoNombreAndTotalGreaterThanEqual(nombre, total);
 		}else if(nombre.isEmpty() && total >=0) {
 			compras= compraRepository.findByTotalGreaterThanEqual(total);
 		}

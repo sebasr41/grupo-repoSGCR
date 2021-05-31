@@ -69,19 +69,20 @@ public class CompraController {
 		
 		else {
 			LOGGER.info("anda? :" + compra);
-		modelView = new ModelAndView("compras");
+		ModelAndView model = new ModelAndView("resultado-compra");
 		
 		Producto producto = productoService.getProductoPorCodigo(compra.getProducto().getCodigo());
 		compra.setProducto(producto);
-		
+		Compra compran = null;
 		compraService.guardarCompra(compra);
-		modelView.addObject("productos", compraService.getAllCompras());
-		
+		model.addObject("compras", compraService.getAllCompras());
+		model.addObject("comprab",compra);
+		return model;
 		}
 					
-		return modelView;
+		
 	}
-	@GetMapping("/compra-ultimo")
+	@GetMapping("/compra-lista")
 	public ModelAndView getComprasPage() {
 		ModelAndView model = new ModelAndView("compras");
 		if(compraService.getAllCompras() == null) {
@@ -120,7 +121,7 @@ public class CompraController {
 		LOGGER.info("anda? :"  + compra);
 		
 		model.addAttribute("comprab", compra);
-	    model.addAttribute("compras", compraService.buscarProductos(compra.getProducto().getNombre(), compra.getTotal()));
+	    model.addAttribute("compra", compraService.buscarProductos(compra.getProducto().getNombre(), compra.getTotal()));
 	    return "compras";
 	}
 }
