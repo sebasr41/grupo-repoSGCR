@@ -10,63 +10,67 @@ import java.time.temporal.ChronoUnit;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
-@Component
-@Entity
-@Table(name = "CLIENTES")
-public class Cliente {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	@Autowired
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "cue_id")
-	private Cuenta cuenta;
-	
-	@Column(name = "cli_tipoDocumento")
-	private String tipoDocumento;
-	
-	@Column(name = "cli_nroDocumento")
-	private int nroDocumento;
-	
-	@Column(name = "cli_nombreApellido")
-	private String nombreApellido;
-	
-	@Column(name="cli_email")
-	private String email;
-	
-	@Column(name = "cli_password")
-	private String password;
-	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@Column(name = "cli_fechaNacimiento") 
-	private LocalDate fechaNacimiento;
-	
-	@Column(name="cli_codigoAreaTelefono")
-	private int codigoAreaTelefono;
-	
-	@Column(name="cli_nroTelefono")
-	private int nroTelefono;
-	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@Column(name="cli_fechaUltimaCompra")
-	private LocalDate fechaUltimaCompra;
-	
+	@Component
+	@Entity
+	@Table(name = "CLIENTES")
+	public class Cliente {
+		
+		@Id
+		@GeneratedValue(strategy = GenerationType.IDENTITY)
+		private Long id;
+		
+		@Autowired
+		@OneToOne(cascade = CascadeType.ALL)
+		@JoinColumn(name = "cue_id")
+		private Cuenta cuenta;
+		
+		@Column(name = "cli_tipoDocumento")
+		private String tipoDocumento;
+		
+		@Size(min=7, max=8, message="El numero de DNI debe tener entre 7 y 9 numeros")
+		@Column(name = "cli_nroDocumento")
+		private int nroDocumento;
+		
+		@NotNull(message="Debe tener un Nombre y Apellido")
+		@Column(name = "cli_nombreApellido")
+		private String nombreApellido;
+		
+		@Email(message="tiene @")
+		@Column(name="cli_email")
+		private String email;
+		
+		@Column(name = "cli_password")
+		private String password;
+		
+		@DateTimeFormat(pattern = "yyyy-MM-dd")
+		@Column(name = "cli_fechaNacimiento") 
+		private LocalDate fechaNacimiento;
+		
+		@Column(name="cli_codigoAreaTelefono")
+		private int codigoAreaTelefono;
+		
+		@Column(name="cli_nroTelefono")
+		private int nroTelefono;
+		
+		@DateTimeFormat(pattern = "yyyy-MM-dd")
+		@Column(name="cli_fechaUltimaCompra")
+		private LocalDate fechaUltimaCompra;
 
-	
 	/***
 	@Autowired
 	@OneToMany(mappedBy = "cliente")
