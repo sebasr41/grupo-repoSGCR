@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.tp8.service.IClienteService;
@@ -114,4 +115,10 @@ public class CompraController {
 		
 		return modelView;
 }
+	@GetMapping("/compra-busqueda")
+	public String buscarCompraPorFiltro(@RequestParam(name="nombre")String nombre, @RequestParam(name="precio")double precio,Model model, @ModelAttribute(name="compra") Compra compra){
+	    model.addAttribute("compra", compraService.getAllCompras());
+	    model.addAttribute("compras", compraService.buscarProductos(nombre, precio));
+	    return "compras";
+	}
 }
