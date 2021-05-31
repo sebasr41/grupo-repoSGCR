@@ -59,6 +59,9 @@ public class CompraController {
 		ModelAndView modelView;
 		if(resultadoValidacion.hasErrors()) {
 		modelView= new ModelAndView("nueva-compra"); 
+		List<Producto> productos = productoService.obtenerProductos();
+		modelView.addObject("compra", compra);
+		modelView.addObject("productos", productos);
 		return modelView;
 		
 	
