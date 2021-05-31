@@ -51,7 +51,6 @@ public class CompraController {
 	@GetMapping("/compra")
 	public String getCompraPage(Model model) {
 		model.addAttribute("compra", compra);	
-		model.addAttribute("clientes", clienteService.obtenerClientes());
 		model.addAttribute("productos", productoService.obtenerProductos());
 		return "nueva-compra";
 	}
@@ -88,10 +87,11 @@ public class CompraController {
 		if(compraService.getAllCompras() == null) {
 			compraService.generarTablaCompra();
 		}
+		model.addObject("comprab", compra);
 		model.addObject("compra", compraService.getAllCompras());
 		
 		return model;
-		
+	
 	}
 	@GetMapping("/compra-eliminar-{id}")
 	public ModelAndView getCompraEliminarPage(@PathVariable (value = "id")Long id) {
@@ -116,7 +116,7 @@ public class CompraController {
 		return modelView;
 }
 	@GetMapping("/compra-busqueda")
-	public String buscarCompraPorFiltro(@RequestParam(name="nombre")String nombre, @RequestParam(name="precio")double precio,Model model, @ModelAttribute(name="compra") Compra compra){
+	public String buscarCompraPorFiltro(@RequestParam(name="nombre")String nombre, @RequestParam(name="precio")double precio,Model model, @ModelAttribute(name="compras") Compra compra){
 	    model.addAttribute("compra", compraService.getAllCompras());
 	    model.addAttribute("compras", compraService.buscarProductos(nombre, precio));
 	    return "compras";
