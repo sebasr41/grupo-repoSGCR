@@ -38,8 +38,8 @@
 			        <td><span th:text="${pro.stock}" ></span> </td>
 			        <td>
 			    		<!-- Edita por medio del id -->
-			    		<a th:href="@{/producto-editar-} + ${pro.id}" class="btn btn-warning">Editar</a>
-			    		<a th:href="@{/producto-eliminar-} + ${pro.id}" class="btn btn-danger">Eliminar</a>
+			    		<a th:href="@{/producto-editar-} + ${pro.codigo}" class="btn btn-warning">Editar</a>
+			    		<a th:href="@{/producto-eliminar-} + ${pro.codigo}" class="btn btn-danger">Eliminar</a>
 			    	</td>
 			      </tr>
 			    </tbody>
