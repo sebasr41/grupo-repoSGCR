@@ -2,13 +2,10 @@ package ar.edu.unju.fi.tp8.controller;
 
 import java.util.Optional;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,19 +34,12 @@ public class ClienteController {
 	}
 	
 	@PostMapping("/cliente-guardar")
-	public ModelAndView guardarClientePage(@Valid @ModelAttribute("cliente")Cliente cliente,BindingResult resultadoValidacion ) {
-		ModelAndView modelView;
-		if(resultadoValidacion.hasErrors()) {
-		modelView= new ModelAndView("nuevo-cliente"); 
-		return modelView;
-		}
+	public ModelAndView guardarClientePage(@ModelAttribute("cliente")Cliente cliente) {
 		
-		else {
-		modelView = new ModelAndView("resultado-cliente");
+		ModelAndView model = new ModelAndView("resultado-cliente");
 		clienteService.guardarCliente(cliente);
-		modelView.addObject("clientes",clienteService.obtenerClientes());
-		return modelView;
-		}
+		model.addObject("clientes",clienteService.obtenerClientes());
+		return model;
 	}
 	
 	@GetMapping("/cliente-cuentas")
