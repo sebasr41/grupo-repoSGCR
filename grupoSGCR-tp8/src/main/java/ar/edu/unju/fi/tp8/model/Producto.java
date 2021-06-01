@@ -11,7 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
+import javax.validation.Valid;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Max;
@@ -36,11 +36,11 @@ public class Producto {
 	private long codigo;
 	
 	@NotBlank(message="Debe tener un Nombre")
-	@Size(min=2,max=100,message = "Debe ingresar de 2 a 100 caracteres")
+	@Size(min=5,max=100,message = "Debe ingresar de 5 a 100 caracteres")
 	@Column(name = "prod_nombre", length = 100)
 	private String nombre;
 	
-	@DecimalMin(value = "0.1",message = "El precio debe ser mayor a 0.1")
+	@DecimalMin(value = "1",message = "El precio debe ser mayor a 1")
 	@DecimalMax(value = "1000000",message = "El precio debe ser menor a 1000000")
 	@Column(name = "prod_precio")
 	private double precio;
@@ -50,7 +50,7 @@ public class Producto {
 	@Column(name = "prod_marca", length = 20)
 	private String marca;
 	
-	@Min(value = 2,message = "El stock debe ser mayor a 2")
+	@Min(value = 1,message = "El stock debe ser mayor a 1")
 	@Max(value = 1000,message = "El stock debe ser menor a 1000")
 	@Column(name = "prod_stock")
 	private int stock;
@@ -58,7 +58,6 @@ public class Producto {
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "producto")
     private List<Compra> compras;
-	
 	
 	// Constructor empty
 	public Producto() {
