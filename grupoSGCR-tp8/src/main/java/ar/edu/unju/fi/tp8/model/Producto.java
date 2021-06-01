@@ -36,7 +36,7 @@ public class Producto {
 	private long codigo;
 	
 	@NotBlank(message="Debe tener un Nombre")
-	@Size(min=5,max=100,message = "Debe ingresar de 5 a 100 caracteres")
+	@Size(min=2,max=100,message = "Debe ingresar de 2 a 100 caracteres")
 	@Column(name = "prod_nombre", length = 100)
 	private String nombre;
 	
@@ -50,7 +50,7 @@ public class Producto {
 	@Column(name = "prod_marca", length = 20)
 	private String marca;
 	
-	@Min(value = 1,message = "El stock debe ser mayor a 1")
+	@Min(value = 2,message = "El stock debe ser mayor a 2")
 	@Max(value = 1000,message = "El stock debe ser menor a 1000")
 	@Column(name = "prod_stock")
 	private int stock;
