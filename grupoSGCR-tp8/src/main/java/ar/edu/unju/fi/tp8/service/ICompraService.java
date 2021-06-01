@@ -19,6 +19,6 @@ public interface ICompraService {
 
 	public void eliminarCompra(Long id);
 	
-	public List<Compra> buscarProductos(String nombre, double precio);
+	public List<Compra> buscarProductos(String nombre, double total);
 
 }

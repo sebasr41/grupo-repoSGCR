@@ -8,9 +8,9 @@ import ar.edu.unju.fi.tp8.model.Compra;
 
 public interface ICompraRepository extends CrudRepository<Compra, Long>{
 	
-	public List<Compra> findByProductoNombreAndProductoPrecioGreaterThanEqual(String nombre, double precio);
+	public List<Compra> findByProductoNombreAndTotalGreaterThanEqual(String nombre, double total);
 	
-	public List<Compra> findByProductoPrecioGreaterThanEqual(double precio);
+	public List<Compra> findByTotalGreaterThanEqual(double total);
 	
 	
 
