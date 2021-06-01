@@ -59,6 +59,7 @@ public class Producto {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "producto")
     private List<Compra> compras;
 	
+	
 	// Constructor empty
 	public Producto() {
 		// TODO Auto-generated constructor stub
