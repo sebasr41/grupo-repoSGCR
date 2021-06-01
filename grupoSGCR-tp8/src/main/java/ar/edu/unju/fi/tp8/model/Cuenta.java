@@ -10,6 +10,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.Valid;
+
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import javax.validation.constraints.PastOrPresent;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -24,18 +31,21 @@ public class Cuenta {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	
+	@DecimalMin(value = "0.1",message = "El saldo debe ser mayor a 0.1")
 	@Column(name = "cue_saldo")
 	private double saldo;
 	
+	@NotNull(message = "Debe ingresar una fecha valida")
+	@PastOrPresent
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "cue_fechaCreacion")
 	private LocalDate fechaCreacion;
 	
-	
+	@NotBlank(message="Debe seleccionar una opcion")
 	@Column(name = "cue_estado")
 	private String estado;
 	
+	@Valid
 	@Autowired
 	@OneToOne(mappedBy = "cuenta", fetch = FetchType.LAZY)
 	private Cliente cliente;

@@ -14,7 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -28,12 +29,15 @@ import org.springframework.stereotype.Component;
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		private Long id;
 		
-		@Size(min=1,message="Debe ingresar algun valor")
+		@Min(value = 3,message = "La cantidad debe ser mayor o igual a 1 digitos")
+		@Max(value = 1000,message = "La cantidad debe ser menor o igual a 1000 digitos")
 		@Column(name = "com_cantidad")
 		private int cantidad;
 		
+		
 		@Column(name = "com_total")
 		private double total;
+		
 		
 		@Autowired
 		@ManyToOne
