@@ -119,5 +119,4 @@ public class Cuenta {
 				+ ", cliente=" + cliente + "]";
 	}
 
-
 }

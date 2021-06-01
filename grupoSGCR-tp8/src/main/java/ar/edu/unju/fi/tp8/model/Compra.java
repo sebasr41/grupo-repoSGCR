@@ -1,5 +1,7 @@
 package ar.edu.unju.fi.tp8.model;
 
+
+
 import java.util.List;
 
 import javax.persistence.Column;
@@ -20,7 +22,6 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
